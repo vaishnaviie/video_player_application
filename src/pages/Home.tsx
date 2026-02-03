@@ -4,8 +4,8 @@ import { categories } from "../data/data.json";
 const Home = () => {
   const [data, setdata] = useState(categories[0].contents);
   return (
-    <div>
-      <ul className=" flex justify-center gap-4">
+    <div className="relative">
+      <ul className="fixed flex justify-center gap-4 bg-background pb-2 w-full">
         {categories.map((category) => (
           <li
             key={category.category.slug}
@@ -16,25 +16,23 @@ const Home = () => {
         ))}
       </ul>
 
-      <ol className=" flex flex-col  ">
+      <ol className=" flex flex-col md:grid md:grid-cols-2 md:gap-4 xl:grid-cols-3 2xl:grid-cols-4 pt-12   ">
         {data.map((category) => (
-          <li className="mb-3">
+          <div className="mb-3">
             <iframe
-              width="100%"
-              height="200px"
-              className=" object-contain"
+              className=" w-[90%] h-[150px] md:h-[200px] lg:h-[250px] mx-4  rounded-md"
               src={category?.mediaUrl}
             ></iframe>
 
-            <div className=" flex gap-2 items-center p-2">
+            <div className="flex gap-2 items-center p-2">
               <img
                 className=" h-8 w-8 rounded-full object-cover"
                 src={category.thumbnailUrl}
                 alt={category.thumbnailUrl}
               />
-              <p className=" text-text-white ">{category.title}</p>
+              <p className=" text-text-white font-bold ">{category.title}</p>
             </div>
-          </li>
+          </div>
         ))}
       </ol>
     </div>
