@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { categories } from "../data/data.json";
 import { useNavigate } from "react-router-dom";
+import logo from "../assets/logo.png";
+import Hamburger from "../svg/Hamburger";
+import SearchIcon from "../svg/SearchIcon";
+import ProfileIcon from "../svg/ProfileIcon";
 
 const Home = () => {
   const [data, setdata] = useState(categories[0].contents);
@@ -8,18 +12,31 @@ const Home = () => {
 
   return (
     <div className="relative">
-      <ul className="fixed flex justify-center gap-4 bg-background pb-2 w-full">
-        {categories.map((category) => (
-          <li
-            key={category.category.slug}
-            className="font-roboto text-sm border border-accent p-1 rounded-sm bg-card text-text-white font-semibold "
-          >
-            {category?.category?.name}
-          </li>
-        ))}
-      </ul>
+      <div className="sticky top-0  bg-background">
+        <div className="flex items-center justify-between px-2 border border-b-secondary-gray ">
+          <img className="h-12 w-12" src={logo} alt="logo" />
 
-      <ol className=" flex flex-col md:grid md:grid-cols-2 md:gap-4 xl:grid-cols-3 2xl:grid-cols-4 pt-12   ">
+          <input
+            type="search"
+            className=" outline-0 pl-2 border border-white p-1 rounded-full text-text-white font-semibold md:w-[30%] "
+          />
+
+          <Hamburger />
+          <ProfileIcon />
+        </div>
+        <ul className=" flex justify-center gap-4 py-2 w-full border border-b-secondary-gray ">
+          {categories.map((category) => (
+            <li
+              key={category.category.slug}
+              className="font-roboto text-sm border border-accent p-1  rounded-sm bg-card text-text-white font-semibold "
+            >
+              {category?.category?.name}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <ol className=" flex flex-col md:grid md:grid-cols-2 md:gap-4 xl:grid-cols-3 2xl:grid-cols-4 pt-2   ">
         {data.map((category) => (
           <div className="mb-3" key={category?.slug}>
             <img
@@ -29,7 +46,7 @@ const Home = () => {
               onClick={() => navigate(`/video/${category?.slug}`)}
             />
 
-            <div className="flex gap-2 items-center p-2">
+            <div className="flex gap-2 items-center p-2 mx-4">
               <img
                 className=" h-8 w-8 rounded-full object-cover"
                 src={category.thumbnailUrl}
