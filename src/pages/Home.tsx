@@ -5,11 +5,13 @@ import logo from "../assets/logo.png";
 import Hamburger from "../svg/Hamburger";
 import ProfileIcon from "../svg/ProfileIcon";
 import CloseIcon from "../svg/CloseIcon";
-import { useData } from "../context/DataContext";
+import { useDataa } from "../hook/useData";
 
 const Home = () => {
-  const { allData } = useData();
-  const [data, setdata] = useState(allData);
+  // const { allData } = useData();
+  const [categoryTag, setCategoryTag] = useState("All");
+  const { tagData } = useDataa(categoryTag);
+  const [data, setData] = useState(tagData);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
   const menuRef = useRef(null);
@@ -26,6 +28,10 @@ const Home = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  useEffect(() => {
+    setData(tagData);
+  }, [categoryTag]);
 
   return (
     <div className="relative">
@@ -47,13 +53,17 @@ const Home = () => {
           <ProfileIcon />
         </div>
         <ul className=" flex overflow-x-scroll whitespace-nowrap scrollbar-hide gap-4 p-2 w-full border border-b-secondary-gray ">
-          <li className="font-roboto text-sm border border-accent p-1  rounded-sm bg-card text-text-white font-semibold ">
+          <li
+            className="font-roboto text-sm border border-accent p-1  rounded-sm bg-card text-text-white font-semibold "
+            onClick={() => setCategoryTag("All")}
+          >
             All
           </li>
           {categories.map((category) => (
             <li
               key={category.category.slug}
               className="font-roboto text-sm border border-accent p-1  rounded-sm bg-card text-text-white font-semibold "
+              onClick={() => setCategoryTag(category.category.name)}
             >
               {category?.category?.name}
             </li>
