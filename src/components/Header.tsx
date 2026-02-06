@@ -4,14 +4,20 @@ import ProfileIcon from "../svg/ProfileIcon";
 import logo from "../assets/logo.png";
 import { useData } from "../context/DataContext";
 import Search from "./Search";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const { isMenuOpen, setIsMenuOpen } = useData();
+  const navigate = useNavigate();
 
-  // console.log("filtereadData", filtereadData);
   return (
     <div className="flex items-center justify-between px-2 border border-b-secondary-gray  ">
-      <img className="h-12 w-12" src={logo} alt="logo" />
+      <img
+        onClick={() => navigate("/")}
+        className="h-12 w-12"
+        src={logo}
+        alt="logo"
+      />
 
       <Search />
 
