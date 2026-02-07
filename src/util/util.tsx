@@ -10,3 +10,19 @@ export function getCategoryForSlug(data, slug) {
   }
   return null;
 }
+
+export const highlightText = (text: string, search: string) => {
+  if (!search || !text) return text;
+  const regex = new RegExp(`(${search})`, "gi");
+  const parts = text.split(regex);
+
+  return parts.map((part, index) =>
+    regex.test(part) ? (
+      <span key={index} className="text-green-500 font-bold">
+        {part}
+      </span>
+    ) : (
+      part
+    )
+  );
+};

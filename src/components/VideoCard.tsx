@@ -1,12 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import BouncingDinoLoader from "../Loader/BouncingDinoLoader";
-
-interface VideoCardProps {
-  thumbnailUrl: string;
-  slug: string;
-  title: string;
-}
+import type { VideoCardProps } from "../type/type";
 
 const VideoCard = ({ thumbnailUrl, slug, title, isTrue }: VideoCardProps) => {
   const navigate = useNavigate();

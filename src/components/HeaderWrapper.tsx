@@ -1,17 +1,8 @@
-import { ReactNode } from "react";
 import Header from "./Header";
 import CategoryTags from "./CategoryTags";
+import type { HeaderWrapperProps } from "../type/type";
 
-interface HeaderWrapperProps {
-  children: ReactNode;
-  showCategories?: boolean;
-  showSearch?: boolean;
-  showProfile?: boolean;
-  sticky?: boolean;
-  className?: string;
-}
-
-const HeaderWrapper = ({ children }: { children: ReactNode }) => {
+const HeaderWrapper = ({ children }: HeaderWrapperProps) => {
   return (
     <>
       <div className="sticky top-0  bg-background z-10">

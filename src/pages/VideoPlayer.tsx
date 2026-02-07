@@ -6,6 +6,7 @@ import { useMiniPlayer } from "../context/MiniPlayerContext";
 import { useDataa } from "../hook/useData";
 import VideoCard from "../components/VideoCard";
 import { getCategoryForSlug } from "../util/util";
+import type { Content } from "../type/type";
 
 const VideoPlayer = () => {
   const { videoId } = useParams();
@@ -15,7 +16,7 @@ const VideoPlayer = () => {
   const videoCategory = getCategoryForSlug(categories, videoId);
   console.log(videoCategory);
   const { tagData } = useDataa(videoCategory);
-  const currentVideo = tagData.find((v: any) => v.slug === videoId);
+  const currentVideo = tagData.find((v: Content) => v.slug === videoId);
 
   useEffect(() => {
     if (currentVideo) {
@@ -43,7 +44,7 @@ const VideoPlayer = () => {
         </div>
 
         <ol className="flex flex-col lg:w-[35%] xl:w-[35%] md:grid md:grid-cols-2 xl:grid xl:grid-cols-2 2xl:w-[22%] lg:overflow-y-auto px-2 gap-3 ">
-          {tagData.map((category) => (
+          {tagData.map((category: Content) => (
             <VideoCard
               key={category?.slug}
               thumbnailUrl={category?.thumbnailUrl}

@@ -1,6 +1,8 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import { useMiniPlayer } from "../context/MiniPlayerContext";
 import MiniPlayerIcon from "../svg/MiniPlayerIcon";
+import Maximize from "../svg/Maximize";
+import Close from "../svg/Close";
 
 const FloatingMiniPlayer = () => {
   const { activeVideo, isFloating, setIsFloating, setActiveVideo } =
@@ -62,36 +64,13 @@ const FloatingMiniPlayer = () => {
               onClick={handleMaximize}
               className="p-1.5 bg-black/70 hover:bg-black text-white rounded-full transition-colors pointer-events-auto shadow-lg"
             >
-              <svg
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
-              </svg>
+              <Maximize />
             </button>
             <button
               onClick={handleClose}
               className="p-1.5 bg-black/70 hover:bg-black text-white rounded-full transition-colors pointer-events-auto shadow-lg"
             >
-              <svg
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <line x1="18" y1="6" x2="6" y2="18"></line>
-                <line x1="6" y1="6" x2="18" y2="18"></line>
-              </svg>
+              <Close />
             </button>
           </div>
         )}

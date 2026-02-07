@@ -1,41 +1,26 @@
 import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useData } from "../context/DataContext";
+import type { ShowSuggestionsProps } from "../type/type";
+import { highlightText } from "../util/util";
 
-const ShowSuggestions = ({ filteredData }) => {
+const { setSearchInput, searchInput } = useData();
+const ShowSuggestions = ({ filteredData }: ShowSuggestionsProps) => {
   const navigate = useNavigate();
-  const { setSearchInput, searchInput } = useData();
-  const suggestionsRef = useRef(null);
+  const suggestionsRef = useRef<HTMLUListElement>(null);
+
   useEffect(() => {
-    const handleClickOutside = (event) => {
+    const handleClickOutside = (event: MouseEvent) => {
       if (
         suggestionsRef.current &&
-        !suggestionsRef.current.contains(event.target)
+        !suggestionsRef.current.contains(event.target as Node)
       ) {
         setSearchInput("");
       }
     };
-
-    // Bind listener on mount, remove on unmount
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [setSearchInput]);
-
-  const highlightText = (text, search) => {
-    if (!search || !text) return text;
-    const regex = new RegExp(`(${search})`, "gi");
-    const parts = text.split(regex);
-
-    return parts.map((part, index) =>
-      regex.test(part) ? (
-        <span key={index} className="text-green-500 font-bold">
-          {part}
-        </span>
-      ) : (
-        part
-      )
-    );
-  };
 
   if (!searchInput || searchInput.trim() === "") return null;
 
@@ -47,7 +32,7 @@ const ShowSuggestions = ({ filteredData }) => {
       {filteredData.length > 0 ? (
         filteredData.slice(0, 10).map((data, index) => (
           <li
-            key={data.id || index}
+            key={data.slug || index}
             className="border-b border-background px-4 py-2 cursor-pointer text-text-white hover:bg-white/10 transition-colors"
             onClick={() => {
               navigate(`/video/${data.slug}`);
