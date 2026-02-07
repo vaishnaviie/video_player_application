@@ -1,4 +1,4 @@
-import { ReactNode, RefObject, Dispatch, SetStateAction } from "react";
+import type { ReactNode, RefObject, Dispatch, SetStateAction } from "react";
 
 export interface Content {
   title: string;
@@ -26,7 +26,7 @@ export interface DataContextType {
   setCategoryTag: Dispatch<SetStateAction<string>>;
   categories: CategoryItem[];
   tagData: Content[];
-  menuRef: RefObject<HTMLDivElement>;
+  menuRef: RefObject<HTMLDivElement | null>;
   data: Content[];
   setData: Dispatch<SetStateAction<Content[]>>;
   searchInput: string;

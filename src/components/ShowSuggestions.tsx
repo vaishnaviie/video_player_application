@@ -4,8 +4,8 @@ import { useData } from "../context/DataContext";
 import type { ShowSuggestionsProps } from "../type/type";
 import { highlightText } from "../util/util";
 
-const { setSearchInput, searchInput } = useData();
 const ShowSuggestions = ({ filteredData }: ShowSuggestionsProps) => {
+  const { setSearchInput, searchInput } = useData();
   const navigate = useNavigate();
   const suggestionsRef = useRef<HTMLUListElement>(null);
 

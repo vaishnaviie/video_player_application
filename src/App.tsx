@@ -1,6 +1,6 @@
 import "./App.css";
 import Home from "./pages/Home";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import VideoPlayer from "./pages/VideoPlayer";
 import FloatingMiniPlayer from "./components/FloatingMiniPlayer";
 

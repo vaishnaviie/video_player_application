@@ -95,7 +95,7 @@ const MobileView = () => {
             className="p-2 hover:bg-gray-800 rounded transition-colors duration-200"
             aria-label="Close menu"
           >
-            <CloseIcon className="w-5 h-5" />
+            <CloseIcon />
           </button>
         </div>
         <div className="p-4 h-[calc(100vh-80px)] overflow-y-auto">

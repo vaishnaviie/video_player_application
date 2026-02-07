@@ -5,15 +5,15 @@ import HeaderWrapper from "../components/HeaderWrapper";
 import { useMiniPlayer } from "../context/MiniPlayerContext";
 import { useDataa } from "../hook/useData";
 import VideoCard from "../components/VideoCard";
-import { getCategoryForSlug } from "../util/util";
 import type { Content } from "../type/type";
+import { getCategoryForSlug } from "../util/util";
 
 const VideoPlayer = () => {
   const { videoId } = useParams();
   const navigate = useNavigate();
   const { setActiveVideo, setIsFloating, activeVideo } = useMiniPlayer();
 
-  const videoCategory = getCategoryForSlug(categories, videoId);
+  const videoCategory = getCategoryForSlug(categories, videoId ?? "");
   console.log(videoCategory);
   const { tagData } = useDataa(videoCategory);
   const currentVideo = tagData.find((v: Content) => v.slug === videoId);

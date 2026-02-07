@@ -5,14 +5,13 @@ import type { DataContextType, DataProviderProps } from "../type/type";
 
 const DataContext = createContext<DataContextType | null>(null);
 
-export const DataProvider = ({ children }: { children: DataProviderProps }) => {
+export const DataProvider = ({ children }: DataProviderProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [categoryTag, setCategoryTag] = useState("All");
   const { tagData } = useDataa(categoryTag);
   const [data, setData] = useState(tagData);
-  const menuRef = useRef<HTMLElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
   const [searchInput, setSearchInput] = useState("");
-  console.log("tagData", tagData);
   return (
     <DataContext.Provider
       value={{
