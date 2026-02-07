@@ -1,68 +1,56 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { categories } from "../data/data.json";
 import HeaderWrapper from "../components/HeaderWrapper";
+import { useMiniPlayer } from "../context/MiniPlayerContext";
+import { useDataa } from "../hook/useData";
+import VideoCard from "../components/VideoCard";
+import { getCategoryForSlug } from "../util/util";
 
 const VideoPlayer = () => {
-  const [data, setdata] = useState(categories[0].contents);
   const { videoId } = useParams();
   const navigate = useNavigate();
+  const { setActiveVideo, setIsFloating, activeVideo } = useMiniPlayer();
 
-  console.log(videoId);
+  const videoCategory = getCategoryForSlug(categories, videoId);
+  console.log(videoCategory);
+  const { tagData } = useDataa(videoCategory);
+  const currentVideo = tagData.find((v: any) => v.slug === videoId);
 
-  let video = null;
-
-  const foundVideo = data.find((v: any) => v.slug == videoId);
-  if (foundVideo) {
-    video = foundVideo;
-  } else {
-    navigate("/");
-  }
+  useEffect(() => {
+    if (currentVideo) {
+      if (!activeVideo || activeVideo.slug !== currentVideo.slug) {
+        setActiveVideo(currentVideo);
+      }
+      setIsFloating(false);
+    } else {
+      navigate("/");
+    }
+  }, [
+    currentVideo,
+    videoId,
+    setActiveVideo,
+    setIsFloating,
+    activeVideo,
+    navigate,
+  ]);
 
   return (
     <HeaderWrapper>
-      <div className="pt-12 lg:flex lg:h-screen ">
-        <div className="grow ">
-          <iframe
-            className=" w-[100%] h-[200px] md:h-[350px] lg:h-[410px] 2xl:h-[90%]  "
-            src={`${video?.mediaUrl}?autoplay=1&mute=1&rel=0`}
-            allow=" autoplay"
-          ></iframe>
-          <div className="flex gap-2 items-center p-2">
-            <img
-              className=" h-8 w-8 rounded-full object-cover"
-              src={video?.thumbnailUrl}
-              alt={video?.thumbnailUrl}
-            />
-            <p className=" text-text-white font-bold ">{video?.title}</p>
-          </div>
+      <div className=" lg:flex lg:h-screen bg-[#0f0f0f]">
+        <div className="grow">
+          <div className="relative h-[250px] md:h-[350px] lg:h-[410px] 2xl:h-[90vh] bg-transparent"></div>
         </div>
 
-        <ol className=" flex flex-col lg:w-[25%] xl:w-[35%] xl:grid xl:grid-cols-2 2xl:w-[22%] lg:overflow-y-auto  ">
-          {/* <p className="text-text-white font-semibold pb-4">
-          Suggested Videos from same category
-        </p> */}
-          {data.map((category) => (
-            <div className="mb-3 " key={category?.slug}>
-              <img
-                className=" w-[90%] h-[150px] md:h-[350px] lg:h-[150px] mx-4 rounded-md object-cover object-[50%_20%]"
-                src={category?.thumbnailUrl}
-                alt={category?.thumbnailUrl}
-                onClick={() => {
-                  navigate(`/video/${category?.slug}`);
-                  window.scrollTo(0, 0);
-                }}
-              />
-
-              <div className="flex gap-2 items-center p-2">
-                <img
-                  className=" h-8 w-8 rounded-full object-cover"
-                  src={category.thumbnailUrl}
-                  alt={category.thumbnailUrl}
-                />
-                <p className=" text-text-white font-bold ">{category.title}</p>
-              </div>
-            </div>
+        <ol className="flex flex-col lg:w-[35%] xl:w-[35%] md:grid md:grid-cols-2 xl:grid xl:grid-cols-2 2xl:w-[22%] lg:overflow-y-auto px-2 gap-3 ">
+          {tagData.map((category) => (
+            <VideoCard
+              key={category?.slug}
+              thumbnailUrl={category?.thumbnailUrl}
+              slug={category?.slug}
+              title={category?.title}
+              isTrue={true}
+            />
           ))}
         </ol>
       </div>

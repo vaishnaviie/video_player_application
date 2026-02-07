@@ -5,7 +5,6 @@ import { useData } from "../context/DataContext";
 const Search = () => {
   const { setSearchInput, searchInput } = useData();
   const { filteredData } = useSearch(searchInput);
-  console.log("filteredData in search", filteredData);
   return (
     <div className="relative">
       <input

@@ -1,10 +1,10 @@
-import CloseIcon from "../svg/CloseIcon";
 import Hamburger from "../svg/Hamburger";
 import ProfileIcon from "../svg/ProfileIcon";
 import logo from "../assets/logo.png";
 import { useData } from "../context/DataContext";
 import Search from "./Search";
 import { useNavigate } from "react-router-dom";
+import MobileView from "./MobileView";
 
 const Header = () => {
   const { isMenuOpen, setIsMenuOpen } = useData();
@@ -14,7 +14,7 @@ const Header = () => {
     <div className="flex items-center justify-between px-2 border border-b-secondary-gray  ">
       <img
         onClick={() => navigate("/")}
-        className="h-12 w-12"
+        className="h-12 w-12 cursor-pointer"
         src={logo}
         alt="logo"
       />
@@ -26,9 +26,10 @@ const Header = () => {
         onClick={() => setIsMenuOpen(!isMenuOpen)}
         aria-label={isMenuOpen ? "Close menu" : "Open menu"}
       >
-        {isMenuOpen ? <CloseIcon /> : <Hamburger />}
+        <Hamburger />
       </button>
       <ProfileIcon />
+      <MobileView />
     </div>
   );
 };
