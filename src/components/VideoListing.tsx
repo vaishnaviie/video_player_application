@@ -13,7 +13,7 @@ const VideoListing = ({ isLoading = false }: VideoListingProps) => {
   if (isLoading) {
     return (
       <div className="flex flex-col md:grid md:grid-cols-2 md:gap-4 xl:grid-cols-3 2xl:grid-cols-4 pt-2">
-        {Array.from({ length: 6 }).map((_, index) => (
+        {Array.from({ length: 12 }).map((_, index) => (
           <VideoCardSkeleton key={index} />
         ))}
       </div>
