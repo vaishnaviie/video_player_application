@@ -23,3 +23,45 @@
 .hide-scrollbar::-webkit-scrollbar {
   display: none; /* Chrome, Safari and Opera */
 }
+
+/* Shimmer.css */
+.shimmer-wrapper {
+  position: relative;
+  overflow: hidden;
+  background-color: #2a2a2a; /* Match your app's dark theme card color */
+  border-radius: 12px;
+}
+
+.shimmer-effect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Creates the light 'stripe' */
+  background-image: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.05) 20%,
+    rgba(255, 255, 255, 0.1) 60%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer-animation 1.5s infinite linear;
+}
+
+@keyframes shimmer-animation {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Static placeholders */
+.skeleton-box {
+  background: #333;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}

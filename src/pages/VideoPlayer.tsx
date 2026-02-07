@@ -43,7 +43,7 @@ const VideoPlayer = () => {
           <div className="relative h-[250px] md:h-[350px] lg:h-[410px] 2xl:h-[90vh] bg-transparent"></div>
         </div>
 
-        <ol className="flex flex-col lg:w-[35%] xl:w-[35%] md:grid md:grid-cols-2 xl:grid xl:grid-cols-2 2xl:w-[22%] lg:overflow-y-auto px-2 gap-3 ">
+        <ol className="flex flex-col lg:w-[35%] xl:w-[35%] md:grid md:grid-cols-2 xl:grid xl:grid-cols-2 2xl:w-[22%] lg:overflow-y-auto px-2 gap-3 hide-scrollbar ">
           {tagData.map((category: Content) => (
             <VideoCard
               key={category?.slug}
